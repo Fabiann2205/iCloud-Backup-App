@@ -7,7 +7,8 @@ LABEL \
     io.hass.description="Upload your backups to iCloud" \
     io.hass.type="addon" \
     io.hass.version="2026.02.0" \
-    maintainer="Fabiann2205 <fabiann2205@icloud.com>"
+    maintainer="Fabiann2205 <fabiann2205@icloud.com>" \
+    org.opencontainers.image.source="https://github.com/Fabiann2205/iCloud-Backup-App"
 
 # Python environment
 ENV PYTHONUNBUFFERED=1
