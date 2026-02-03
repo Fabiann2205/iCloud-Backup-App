@@ -1,0 +1,27 @@
+name: test_packages
+on: 
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy_to_stable:
+    name: Test container
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v6
+      with:
+        persist-credentials: false
+
+    - name: Build Addon Image
+      uses: home-assistant/builder@2025.11.0
+      with:
+        args: |
+          --test \
+          --aarch64 \
+          --amd64 \
+          --target icloudbackup \
+          --docker-hub ghcr.io/fabiann2205 \
+          --docker-hub-check

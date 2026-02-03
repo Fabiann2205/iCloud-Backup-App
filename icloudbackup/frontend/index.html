@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iCloud Backup</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1 id="mainTitle">iCloud Backup</h1>
+    
+    <!-- Running Status Screen -->
+    <div id="runningStatus" class="status-view" style="display: none;">
+        <div class="status-icon">✓</div>
+        <h2 id="runningTitle">Everything is running</h2>
+        <p id="runningMessage" class="status-message">The iCloud Backup service is active and monitoring your backups.</p>
+        <div class="status-info">
+            <div class="status-indicator">
+                <span class="indicator-dot"></span>
+                <span id="serviceActiveText">Service active</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 2FA Verification Screen -->
+    <div id="verificationView" class="status-view" style="display: none;">
+        <h2 id="twoFactorTitle">Two-Factor Authentication</h2>
+        <p id="twoFactorMessage">Please enter the 6-digit verification code you received on your Apple device.</p>
+        
+        <div id="sendVerificationCode">
+            <label id="codeLabel" for="code">Verification Code:</label>
+            <input type="text" id="code" name="code" aria-label="Verification Code" inputmode="numeric"
+                   placeholder="123456" maxlength="8" autocomplete="off">
+            <button type="button" id="submitBtn" onclick="submitForm()">Verify</button>
+            <div id="message"></div>
+        </div>
+    </div>
+    
+    <!-- Loading Screen -->
+    <div id="loadingStatus" class="status-view">
+        <div class="loading-spinner"></div>
+        <p id="loadingText">Loading status...</p>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

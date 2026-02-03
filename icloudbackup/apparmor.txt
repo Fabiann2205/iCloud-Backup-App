@@ -1,0 +1,80 @@
+#include <tunables/global>
+
+profile icloud_backup flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+
+  # Capabilities
+  capability,
+  file,
+  signal (send) set=(kill,term,int,hup,cont),
+
+  # S6-Overlay
+  /init ix,
+  /bin/** ix,
+  /usr/bin/** ix,
+  /run/{s6,s6-rc*,service}/** ix,
+  /package/** ix,
+  /command/** ix,
+  /etc/services.d/** rwix,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
+  /run/{,**} rwk,
+  /dev/tty rw,
+
+  # Bashio
+  /usr/lib/bashio/** ix,
+  /tmp/** rwk,
+
+  # Access to options.json and other files within your addon
+  /data/** rwk,
+  /data/pyicloud/** rwk,
+  /data/pyicloud/cookie rwk,
+
+  # Python and application files
+  /usr/bin/python3 ix,
+  /usr/bin/python3.* ix,
+  /usr/local/lib/python*/site-packages/** r,
+  /usr/local/lib/python*/** r,
+  /app/** r,
+  /app/run.sh ix,
+  /app/uploader.py ix,
+  /app/uploader.pyc ix,
+  /app/frontend/** r,
+
+  # Network access for iCloud API
+  network inet dgram,
+  network inet stream,
+  network inet6 dgram,
+  network inet6 stream,
+  network netlink raw,
+
+  # Access to backup directory (mapped volume)
+  /backup/** rw,
+  
+  # Access to shared directories
+  /share/** rw,
+
+  # System files
+  /etc/passwd r,
+  /etc/group r,
+  /etc/nsswitch.conf r,
+  /etc/resolv.conf r,
+  /etc/hosts r,
+  /etc/ssl/certs/** r,
+  /etc/ssl/openssl.cnf r,
+  /etc/ca-certificates/** r,
+  /usr/share/ca-certificates/** r,
+
+  # Proc filesystem
+  /proc/sys/net/core/somaxconn r,
+  /proc/*/net/if_inet6 r,
+  /proc/*/stat r,
+  
+  # Temporary files
+  /tmp/** rwk,
+  /var/tmp/** rwk,
+  
+  # Python cache and runtime
+  /usr/lib/python*/__pycache__/** rwk,
+  /app/__pycache__/** rwk,
+}
