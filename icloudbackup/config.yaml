@@ -1,6 +1,6 @@
 name: "iCloud Backup App"
 description: "Upload your backups to iCloud Drive"
-version: "2026.02.0"
+version: "2026.02.1"
 image: ghcr.io/fabiann2205/{arch}-icloud-backup-app
 slug: "icloud_backup"
 init: false
